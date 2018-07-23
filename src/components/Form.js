@@ -1,37 +1,36 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-const dinoData = './listings.json'
+const addJob = { title: '', pay: '', description: '', interested: [] };
 //class component allows it to have state and methods
-class Form extends Component {
+export default class Form extends React.Component {
   state = {
-    title: '',
-    pay: '',
-    description: ''
-  }
+    statusMessage: '',
+    job: { ...addJob }
+  };
   //essentially an event handler
   handleChange = (event) => {
-    const key = event.target.name
-    const value = event.target.value
-
-    this.setState({
-      [key]: value
-    }, () => console.log(this.state))
-  }
+    const job = this.state.data;
+    job[event.target.name] = event.target.value;
+    this.setState({ job: job, statusMessage: null });
+  };
 
   handleSubmit = (event) => {
     event.preventDefault()
-
-    fetch(dinoData, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(this.state)
-    })
-    .then(response => response.json())
-    .then(newPost => {
-      console.log(newPost.created)
-    })
+    if (!this.props.createJob)
+      throw new Error("Form requires a props.createJob function!");
+    if (!this.state.data.title) {
+      this.setState({ statusMessage: "Please Enter a Title" });
+      return;
+    }
+    if (!this.state.data.pay) {
+      this.setState({ statusMessage: "Please Enter Salary Fields" });
+      return;
+    }
+    this.props.createJob(this.state.data);
+    this.setState({
+      job: { ...addJob },
+      statusMessage: 'Job Successfully Added!'
+    });
   }
 
   render() {
@@ -41,7 +40,6 @@ class Form extends Component {
         <input id='title-box'
           type='text'
           value={this.state.title}
-          //name is the input that has just been changed
           name='title'
           onChange={this.handleChange} />
         <label htmlFor='pay-box'>Compensation</label>
@@ -56,13 +54,10 @@ class Form extends Component {
           value={this.state.description}
           name='description'
           onChange={this.handleChange} />
-        <button type='submit'>Submit</button>
+        <input type='submit' name='submit' value='Submit' />
+        <div className='status-bar'>{this.state.statusMessage}</div>
+        {/* <button type='submit'>Submit</button> */}
       </form>
-
     )
   }
-
-
 }
-
-export default Form
