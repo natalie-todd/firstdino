@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
+
 import './index.css';
 
 import Joblists from './components/Joblists'
@@ -17,13 +17,17 @@ class App extends Component {
   }
 
   getJobs = () => {
-    fetch(dinoData)
+    return fetch(dinoData)
       .then(response => response.json())
-      .then(data => {
-        this.setState({ data })
-        console.log(data)
-      })
+      .then(data => this.setState({ data }));
   }
+
+  createJob = data => {
+    const { jobs } = this.state;
+    data.unshift(data);
+    return this.setState({ jobs });
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -36,13 +40,13 @@ class App extends Component {
             </ul>
           </section>
           <aside id="side-bar">
-            <h3>Add a Job</h3>
-            <Form />
-        </aside>
-      </main>
+            <h2>Add a Job</h2>
+            <Form createJob={this.createJob} />
+          </aside>
+        </main>
       </React.Fragment>
-            )
-          }
-        }
-        
-        export default App;
+    )
+  }
+}
+
+export default App;
