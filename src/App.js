@@ -4,6 +4,7 @@ import './index.css';
 
 import Joblists from './components/Joblists'
 import Header from './components/Header'
+import Form from './components/Form'
 
 const dinoData = './listings.json'
 
@@ -26,18 +27,22 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-      <Header />
-      <main>
-        <section id="job-listings">
-          <h2>Job Listings</h2>
-          <ul id="job-listings">
-            <Joblists data={this.state.data} />
-          </ul>
-        </section>
+        <Header />
+        <main>
+          <section id="job-listings">
+            <h2>Job Listings</h2>
+            <ul id="job-listings">
+              <Joblists data={this.state.data} />
+            </ul>
+          </section>
+          <aside id="side-bar">
+            <h3>Add a Job</h3>
+            <Form />
+        </aside>
       </main>
       </React.Fragment>
-    )
-  }
-}
-
-export default App;
+            )
+          }
+        }
+        
+        export default App;
