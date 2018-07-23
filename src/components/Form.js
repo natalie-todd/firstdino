@@ -18,7 +18,7 @@ export default class Form extends React.Component {
     event.preventDefault()
     if (!this.props.createJob)
       throw new Error("Form requires a props.createJob function!");
-    if (!this.state.data.title) {
+    if (!this.state.title) {
       this.setState({ statusMessage: "Please Enter a Title" });
       return;
     }
