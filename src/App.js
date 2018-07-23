@@ -5,13 +5,13 @@ import './index.css';
 import Joblists from './components/Joblists'
 import Header from './components/Header'
 import Form from './components/Form'
+import Footer from './components/Footer'
 
 const dinoData = './listings.json'
 
 class App extends Component {
-  state = {
-    other: ['I hope this works', 'and this', 'this too'],
-  }
+  state = { jobs: [] }
+
   componentDidMount() {
     this.getJobs();
   }
@@ -19,32 +19,31 @@ class App extends Component {
   getJobs = () => {
     return fetch(dinoData)
       .then(response => response.json())
-      .then(data => this.setState({ data }));
+      .then(jobs => this.setState({ jobs }));
   }
 
-  createJob = data => {
+  createJob = job => {
     const { jobs } = this.state;
-    data.unshift(data);
+    jobs.unshift(job);
     return this.setState({ jobs });
   };
 
   render() {
     return (
-      <React.Fragment>
+      <main>
         <Header />
-        <main>
-          <section id="job-listings">
-            <h2>Job Listings</h2>
-            <ul id="job-listings">
-              <Joblists data={this.state.data} />
-            </ul>
-          </section>
-          <aside id="side-bar">
-            <h2>Add a Job</h2>
-            <Form createJob={this.createJob} />
-          </aside>
-        </main>
-      </React.Fragment>
+        <section>
+          <h2>Job Listings</h2>
+          <ul id='job-listings'>
+            <Joblists jobs={this.state.jobs} />
+          </ul>
+        </section>
+        <aside id="side-bar">
+          <h2>Add a Job</h2>
+          <Form createJob={this.createJob} />
+        </aside>
+        <Footer />
+      </main>
     )
   }
 }
