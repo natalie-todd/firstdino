@@ -7,7 +7,7 @@ export default class Form extends React.Component {
     statusMessage: '',
     job: { ...addJob }
   };
-  
+
   handleChange = (event) => {
     const job = this.state.job;
     job[event.target.name] = event.target.value;
@@ -49,11 +49,13 @@ export default class Form extends React.Component {
           name='pay'
           onChange={this.handleChange} />
         <label htmlFor='description-box'>Description</label>
-        <input id='description-box'
-          type='text'
+        <textarea
+          name="description"
+          rows="8"
+          cols="40"
           value={this.state.job.description}
-          name='description'
-          onChange={this.handleChange} />
+          onChange={this.handleChange} 
+        />
         <input type='submit' name='submit' value='Submit' />
         <div className='status-bar'>{this.state.statusMessage}</div>
       </form>

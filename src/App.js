@@ -30,20 +30,22 @@ class App extends Component {
 
   render() {
     return (
+      <React.Fragment>
+      <Header />
       <main>
-        <Header />
-        <section>
+        <section id='job-listings'>
           <h2>Job Listings</h2>
           <ul id='job-listings'>
             <Joblists jobs={this.state.jobs} />
           </ul>
         </section>
-        <aside id="side-bar">
-          <h2>Add a Job</h2>
+        <section id="side-bar">
+          <h3>Add a Job</h3>
           <Form createJob={this.createJob} />
-        </aside>
+        </section>
         <Footer />
       </main>
+      </React.Fragment>
     )
   }
 }
