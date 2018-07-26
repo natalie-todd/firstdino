@@ -17,13 +17,13 @@ export default class Form extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     if (!this.props.createJob)
-      throw new Error("Form requires a props.createJob function!");
+      throw new Error('Form requires a props.createJob function!');
     if (!this.state.job.title) {
-      this.setState({ statusMessage: "Please Enter a Title" });
+      this.setState({ statusMessage: 'Please Enter a Title' });
       return;
     }
     if (!this.state.job.pay) {
-      this.setState({ statusMessage: "Please Enter Salary Fields" });
+      this.setState({ statusMessage: 'Please Enter Salary Fields' });
       return;
     }
     this.props.createJob(this.state.job);
@@ -50,9 +50,9 @@ export default class Form extends React.Component {
           onChange={this.handleChange} />
         <label htmlFor='description-box'>Description</label>
         <textarea
-          name="description"
-          rows="8"
-          cols="40"
+          name='description'
+          rows='8'
+          cols='40'
           value={this.state.job.description}
           onChange={this.handleChange} 
         />

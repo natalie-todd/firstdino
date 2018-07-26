@@ -39,7 +39,7 @@ class App extends Component {
             <Joblists jobs={this.state.jobs} />
           </ul>
         </section>
-        <section id="side-bar">
+        <section id='side-bar'>
           <h3>Add a Job</h3>
           <Form createJob={this.createJob} />
         </section>
