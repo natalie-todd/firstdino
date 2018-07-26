@@ -24,3 +24,4 @@ https://stdino-c681d.firebaseapp.com/ Firebase Link
 
 #### Deployed Link
 
+https://stdino-c681d.firebaseapp.com/
